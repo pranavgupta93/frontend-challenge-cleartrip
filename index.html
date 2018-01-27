@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app='kickstartApp'>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	
+	<title>Kickstarter</title>
+</head>
+<body ng-controller="maincontroller as main">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<h2 style="color: white">Kickstarter Application</h2>
+</nav>
+<br><br><br>
+<div class="container">
+	<div class="row">
+		<div class="form-control">
+			<strong>Project Search:</strong> <input type="text" ng-model="namesearch.blurb">
+			<!-- <strong ng-model="funds" ng-init="funds='percentage.funded'">Funded % </strong><select>
+				<option value="['percentage.funded']">Low to High</option>
+				<option value="-['percentage.funded']">High to Low</option>
+			</select> -->
+			<strong>Location:</strong> <select ng-model="loc.location">
+				<option></option>
+				<option ng-repeat="loc in main.allLocations" value="{{loc}}"> {{loc}}</option>
+			</select>
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-md-4" ng-repeat="data in main.allData|filter:namesearch|filter:loc">
+			<div class="col-md-12" style="border-color: black;border-style: dashed;"><strong>Amount Pledged:</strong> {{data["amt.pledged"]}}<br>
+			<strong>Project:</strong> {{data.blurb}}<br>
+			<strong>Project Creater:</strong> {{data.by}}<br>
+			<strong>Country:</strong> {{data.country}}<br>
+			<strong>Currency Type:</strong> {{data.currency}}<br>
+			<strong>Campaign End Time:</strong> {{data["end.time"]|date:'medium'}}<br>
+			<strong>Location:</strong> {{data.location}}<br>
+			<strong>Funded %:</strong> {{data["percentage.funded"]}}<br>
+			<strong>Total Backers:</strong> {{data["num.backers"]}}<br>
+			<strong>State:</strong> {{data.state}}<br>
+			<strong>Title:</strong> {{data.title}}<br>
+			<strong>Type:</strong> {{data.type}}<br>
+			<strong>Link:</strong> <a href="https://www.kickstarter.com/{{data.url}}">Click Here</a><br></div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<script type="text/javascript" src="angular/maincontroller.js"></script>
+</html>
